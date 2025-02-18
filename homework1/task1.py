@@ -1,16 +1,17 @@
 import pytest
 
 #Function to print "Hello World"
-def helloWorld():
+def hello_world():
     print ("Hello, World!") 
+
 
 #Function to test helloWorld()
 # capsys is a way to capture stdout/stderr output - see below links for help
 # https://docs.pytest.org/en/stable/how-to/capture-stdout-stderr.html#captures
 # https://docs.pytest.org/en/stable/reference/reference.html#pytest.capture.capsys 
-def test_helloWorld(capsys):
+def test_hello_world(capsys):
     #call function       
-    helloWorld()
+    hello_world()
     
     #store output in captured as namedtuple - out and err (we want out, that should be "Hello, World!")
     captured = capsys.readouterr()
@@ -24,6 +25,6 @@ def test_helloWorld(capsys):
 # all test_*.py or *_test.py files in the directory or subdirectory) but this will 
 # keep everything organized for grading purposes
 if __name__=="__main__":
-    helloWorld()
+    hello_world()
     pytest.main([__file__])
 
