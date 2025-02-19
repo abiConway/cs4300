@@ -1,7 +1,5 @@
 import pytest
 
-
-# Used ChatGPT for this https://chatgpt.com/share/67b533ef-bfec-8007-b80a-46014b0381e1 
 #Function 1
 #Simply check if a number is less than or greater than 0, oherwise it is zero. 
 #Make suer the argument passed is the correct data type
@@ -69,12 +67,9 @@ def test_is_neg_pos_zero(input, expected_output):
 #Test 2
 #pass the standard out/err to the test function
 def test_print_ten_prime_numbers(capsys):
-    #call function
     print_ten_prime_numbers()
     #store output in captured as namedtuple - out and err (we want out, that should be "Hello, World!")
     captured = capsys.readouterr()
-
-    #Test if the standard output of helloWorld is right
     assert captured.out.strip() == "2 3 5 7 11 13 17 19 23 29"
 
 
@@ -93,3 +88,4 @@ if __name__=="__main__":
     pytest.main([__file__]) #make sure to pass the current file upon execution
 
     
+# Used ChatGPT for this https://chatgpt.com/share/67b533ef-bfec-8007-b80a-46014b0381e1 
