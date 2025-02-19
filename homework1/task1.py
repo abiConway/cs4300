@@ -26,5 +26,5 @@ def test_hello_world(capsys):
 # keep everything organized for grading purposes
 if __name__=="__main__":
     hello_world()
-    pytest.main([__file__])
+    pytest.main([__file__]) #make sure to pass the current file upon execution
 

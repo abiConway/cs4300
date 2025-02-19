@@ -19,7 +19,7 @@ def data_types():
 def test_dataTypes():
     test_data = data_types()
 
-    # isinstance compares 
+    # isinstance compares to data type
     assert isinstance(test_data["integer"], int)
     assert isinstance(test_data["float"], float)
     assert isinstance(test_data["string"], str)
