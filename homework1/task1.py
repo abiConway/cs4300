@@ -21,9 +21,6 @@ def test_hello_world(capsys):
 
     
 # run helloworld and pytest of helloworld on file execution
-# Typicall best practice is to put this in a seperate test module ("pytest" will run
-# all test_*.py or *_test.py files in the directory or subdirectory) but this will 
-# keep everything organized for grading purposes
 if __name__=="__main__":
     hello_world()
     pytest.main([__file__]) #make sure to pass the current file upon execution

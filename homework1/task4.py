@@ -24,6 +24,7 @@ def calculate_discount_price(price, discount_percent):
 
 #Test function with both integers and floats
 #use this decorator to test a function multiple times with different inputs
+#https://www.google.com/search?q=test+multiple+inputs+in+pytest&oq=test+multiple+inputs+in+pytest&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIHCAEQIRigATIHCAIQIRigATIHCAMQIRigATIHCAQQIRigATIHCAUQIRifBTIHCAYQIRifBTIHCAcQIRifBTIHCAgQIRifBTIHCAkQIRifBdIBCTEwMTA4ajBqOagCALACAQ&sourceid=chrome&ie=UTF-8 
 @pytest.mark.parametrize("price, discount, expected_output",[
     (100, 10, 90.00), 
     (98.99, 5.5, 93.55),

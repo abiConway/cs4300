@@ -18,8 +18,6 @@ def data_types():
 #Test goes through each key value pair, and isinstance tests the data type in each
 def test_dataTypes():
     test_data = data_types()
-
-    # isinstance compares to data type
     assert isinstance(test_data["integer"], int)
     assert isinstance(test_data["float"], float)
     assert isinstance(test_data["string"], str)
