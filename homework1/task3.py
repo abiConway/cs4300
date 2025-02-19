@@ -83,6 +83,8 @@ def test_print_ten_prime_numbers(capsys):
 def test_sum_one_to_hundred():
     assert sum_one_to_hundred() == 5050
 
+
+#Run all functions and tests
 if __name__=="__main__":
     #Change the neg/pos/zero number tested here
     is_neg_pos_zero("hello")
