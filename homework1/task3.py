@@ -1,5 +1,7 @@
 import pytest
 
+
+# Used ChatGPT for this https://chatgpt.com/share/67b533ef-bfec-8007-b80a-46014b0381e1 
 #Function 1
 #Simply check if a number is less than or greater than 0, oherwise it is zero. 
 #Make suer the argument passed is the correct data type
