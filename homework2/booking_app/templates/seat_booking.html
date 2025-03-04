@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center">🎟 Book Your Seat</h2>
+    <p class="text-center text-muted">Movie: <strong>{{ movie.title }}</strong></p>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <div class="d-flex flex-wrap justify-content-center">
+                {% for seat in seats %}
+                <button class="seat btn {% if seat.is_booked %}btn-danger{% else %}btn-success{% endif %} m-2"
+                    data-seat-id="{{ seat.id }}"
+                    {% if seat.is_booked %}disabled{% endif %}>
+                    {{ seat.seat_number }}
+                </button>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Modal -->
+    <div class="modal fade" id="bookingModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm Booking</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to book seat <strong id="selectedSeat"></strong>?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="confirmBooking">Yes, Book</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    let selectedSeatId = null;
+    
+    // When a seat is clicked
+    document.querySelectorAll(".seat.btn-success").forEach(button => {
+        button.addEventListener("click", function() {
+            selectedSeatId = this.getAttribute("data-seat-id");
+            document.getElementById("selectedSeat").innerText = this.innerText;
+            new bootstrap.Modal(document.getElementById("bookingModal")).show();
+        });
+    });
+
+    // Confirm booking
+    document.getElementById("confirmBooking").addEventListener("click", function() {
+        fetch(`/api/seats/${selectedSeatId}/book_seat/`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": "{{ csrf_token }}"
+            },
+            body: JSON.stringify({ movie_id: "{{ movie.id }}" })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message) {
+                alert(data.message);
+                location.reload();
+            } else {
+                alert("Error: " + data.error);
+            }
+        });
+    });
+});
+</script>
+{% endblock %}

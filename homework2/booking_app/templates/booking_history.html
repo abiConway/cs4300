@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center">📜 Your Booking History</h2>
+
+    <table class="table table-striped table-hover mt-3">
+        <thead class="table-dark">
+            <tr>
+                <th>Movie</th>
+                <th>Seat Number</th>
+                <th>Booking Date</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.movie.title }}</td>
+                <td>{{ booking.seat.seat_number }}</td>
+                <td>{{ booking.booking_date }}</td>
+                <td>
+                    {% if booking.booking_date >= now %}
+                        <span class="badge bg-success">Upcoming</span>
+                    {% else %}
+                        <span class="badge bg-secondary">Past</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if booking.booking_date >= now %}
+                        <button class="btn btn-danger btn-sm cancel-booking" data-booking-id="{{ booking.id }}">Cancel</button>
+                    {% else %}
+                        <span class="text-muted">N/A</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="5" class="text-center">No bookings found.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+document.querySelectorAll(".cancel-booking").forEach(button => {
+    button.addEventListener("click", function() {
+        const bookingId = this.getAttribute("data-booking-id");
+        if (confirm("Are you sure you want to cancel this booking?")) {
+            fetch(`/api/bookings/${bookingId}/`, {
+                method: "DELETE",
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}"
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert("Booking canceled successfully!");
+                location.reload();
+            });
+        }
+    });
+});
+</script>
+{% endblock %}
